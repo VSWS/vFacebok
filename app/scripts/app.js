@@ -104,9 +104,10 @@ app.config(function ($stateProvider, $urlRouterProvider, $mdIconProvider) {
 
 
 }).run(function ($mdSidenav, $rootScope, $log, $fb) {
-    $fb.config('405337779615879');
-    console.log("Facebook Config:", $fb.config.xfbml)
+
+    $fb.setAppId('123213213');
     $fb.init();
+    console.log($fb.getAppId());
     $rootScope.toggleLeft = function () {
         $mdSidenav('leftMenu').toggle()
             .then(function () {

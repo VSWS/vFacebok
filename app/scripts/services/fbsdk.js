@@ -10,19 +10,17 @@
 angular.module('ifacebookApp')
     .service('$fb', function () {
 
+        var AppId;
+
         return {
-            getAppId: function (appId) {
-                return appId;
+            setAppId: function (id) {
+                AppId = id;
+                return id;
             },
-
-            init: function (appId) {
-
-                if(appid === undefined) {
-                    console.log("Facebook not found AppID!!! pls check!")
-                }else{
-                    this.getAppId(appId);
-                }
-
+            getAppId : function () {
+                return AppId;
+            },
+            init: function () {
                 return (function(d, s, id){
                     var js, fjs = d.getElementsByTagName(s)[0];
                     if (d.getElementById(id)) {return;}
@@ -34,11 +32,13 @@ angular.module('ifacebookApp')
 
             api : function (callback) {
                 return window.fbAsyncInit = function() {
+
                     FB.init({
-                        appId      : this.getAppId,
+                        appId      : AppId,
                         xfbml      : true,
                         version    : 'v2.3'
                     });
+
                     callback(FB);
                 };
             }
