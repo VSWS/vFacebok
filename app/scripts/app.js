@@ -105,9 +105,12 @@ app.config(function ($stateProvider, $urlRouterProvider, $mdIconProvider) {
 
 }).run(function ($mdSidenav, $rootScope, $log, $fb) {
 
+    // Set AppId Facebook & Init SDK Facebook
     $fb.setAppId('123213213');
     $fb.init();
-    console.log($fb.getAppId());
+    console.log('Facebook AppID: ', $fb.getAppId());
+
+    // Implement toggle Menu
     $rootScope.toggleLeft = function () {
         $mdSidenav('leftMenu').toggle()
             .then(function () {
