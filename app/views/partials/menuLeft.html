@@ -1,0 +1,19 @@
+<md-sidenav flex class="md-sidenav-left md-whiteframe-z2" md-component-id="leftMenu"
+            md-is-locked-open="$mdMedia('gt-md')">
+    <md-toolbar class="md-theme-indigo">
+        <h1 class="md-toolbar-tools">iFacebook</h1>
+    </md-toolbar>
+
+    <md-content id="leftMenu" ng-controller="LeftMenuCtrl">
+        <md-list class="listMenu">
+            <md-item ng-repeat="setting in settings">
+
+                <md-button layout="row" flex layout-fill class="md-no-style" ng-click="goState(setting.link)" >
+                    <md-icon md-svg-icon="{{setting.icon}}"></md-icon>
+                       {{ setting.name }}
+                </md-button>
+
+            </md-item>
+        </md-list>
+    </md-content>
+</md-sidenav>

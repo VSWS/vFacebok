@@ -2,13 +2,14 @@
 
 /**
  * @ngdoc function
- * @name ifacebookApp.controller:AboutCtrl
+ * @name ifacebookApp.controller:MapCtrl
  * @description
- * # AboutCtrl
+ * # MapCtrl
  * Controller of the ifacebookApp
  */
 angular.module('ifacebookApp')
-  .controller('AboutCtrl', function ($scope) {
+  .controller('MapCtrl', function ($scope, $rootScope) {
+      $rootScope.titleHeader = "Map";
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
