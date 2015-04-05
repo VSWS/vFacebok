@@ -8,7 +8,7 @@
  * Controller of the ifacebookApp
  */
 angular.module('ifacebookApp')
-    .controller('FanPageCtrl', function ($scope, $rootScope, CampaignFactory) {
+    .controller('FanPageCtrl', function ($scope, $rootScope, CampaignFactory, $facebook) {
         $rootScope.titleHeader = "FanPage";
 
 
@@ -35,4 +35,13 @@ angular.module('ifacebookApp')
 
         // Implement tab: Khoi tao
         $scope.initUrl = undefined;
+        var token = token = "CAACEdEose0cBAJDBFbfrLnlRp3vlzOrUDlJ1N5MXj0KZBf7TZCGdxahODEF8om7tsJGF8nFab3GIbO3RjXp5U2kxJUaxRMe3mpJzNdp1isivkGNEIgSd8gw5tZALykb06DzAOoy7gu1yqieDaI3X9XG8nvkKehWNENwYLBs6LAHnAgCrZA4TSBGSjxCI7OWmOHuvfHcElv0eeewaAIwR";
+
+        $facebook.api(function (fb) {
+            fb.api("/me", "get", {
+                access_token : token
+            }, function (res) {
+                console.log("Data Facebook:", res);
+            })
+        });
     });
