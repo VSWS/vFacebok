@@ -8,7 +8,7 @@
  * Controller of the ifacebookApp
  */
 angular.module('ifacebookApp')
-    .controller('FanPageCtrl', function ($scope, $rootScope, CampaignFactory, $facebook) {
+    .controller('FanPageCtrl', function ($scope, $rootScope, CampaignFactory, $fb) {
         $rootScope.titleHeader = "FanPage";
 
 
@@ -35,9 +35,9 @@ angular.module('ifacebookApp')
 
         // Implement tab: Khoi tao
         $scope.initUrl = undefined;
-        var token = token = "CAACEdEose0cBAJDBFbfrLnlRp3vlzOrUDlJ1N5MXj0KZBf7TZCGdxahODEF8om7tsJGF8nFab3GIbO3RjXp5U2kxJUaxRMe3mpJzNdp1isivkGNEIgSd8gw5tZALykb06DzAOoy7gu1yqieDaI3X9XG8nvkKehWNENwYLBs6LAHnAgCrZA4TSBGSjxCI7OWmOHuvfHcElv0eeewaAIwR";
+        var token = token = "CAACEdEose0cBAL0ZCpbDHTu8kpMFhzfN7fuUsx60LqlYRAfiQdACLLyw8WmqvfZCo5Y8VmFU3iYc8D4TPYtJIuc18Y1I9fofUqEqVpQdVukWmSx1Gxvq8bZBxXZCr0WnJjZA5jkkA5pKbHoF6VOL7TuFCAfERC1ZCOz1cvRF65dQ21LP9iUm73xzGfIVx5pHMsIPtViGqY4hyA27R9a411";
 
-        $facebook.api(function (fb) {
+        $fb.api(function (fb) {
             fb.api("/me", "get", {
                 access_token : token
             }, function (res) {

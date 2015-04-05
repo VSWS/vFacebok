@@ -103,8 +103,10 @@ app.config(function ($stateProvider, $urlRouterProvider, $mdIconProvider) {
         .icon('user', 'images/svg/ic_account_circle_24px.svg')
 
 
-}).run(function ($mdSidenav, $rootScope, $log) {
-
+}).run(function ($mdSidenav, $rootScope, $log, $fb) {
+    $fb.config('405337779615879');
+    console.log("Facebook Config:", $fb.config.xfbml)
+    $fb.init();
     $rootScope.toggleLeft = function () {
         $mdSidenav('leftMenu').toggle()
             .then(function () {
