@@ -31,9 +31,6 @@ angular.module('ifacebookApp')
         if (old && (old != current)) $log.debug('Goodbye ' + previous.title + '!');
         if (current)                $log.debug('Hello ' + selected.title + '!');
       });
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+
+
   });

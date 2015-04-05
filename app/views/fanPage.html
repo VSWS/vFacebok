@@ -1,1 +1,32 @@
-fan page
+<md-tabs md-selected="tabs.selectedIndex">
+
+    <!-- Chiến Dịch-->
+    <md-tab label="Chiến dịch">
+        <h4>Lựa chọn chiến dịch:</h4>
+        <md-select ng-model="campaigns" placeholder="Danh sách Chiến dịch">
+            <md-select-label>Các chiến dịch</md-select-label>
+            <md-option ng-value="campaign.value" ng-repeat="campaign in campaigns track by $index" >{{campaign.name}}</md-option>
+        </md-select>
+        <md-button class="md-primary md-raised" ng-click="nextTab()" ng-disabled="">Tiếp tục</md-button>
+    </md-tab>
+
+    <!-- Khởi tạo -->
+    <md-tab label="Khởi tạo" ng-disabled="tabs.tab2Locked">
+        <h4>Nhập đường link Fanpage:</h4>
+        <md-input-container>
+            <label>Link Fanpage</label>
+            <input ng-model="user.title">
+        </md-input-container>
+        <md-button class="md-primary md-raised" ng-click="nextTab()" ng-disabled="">Tiếp tục</md-button>
+    </md-tab>
+
+    <!-- Phân tích -->
+    <md-tab label="Phân tích" ng-disabled="tabs.tab3Locked"></md-tab>
+
+    <!-- Xử lý -->
+    <md-tab label="Xử lý" ng-disabled="tabs.tab4Locked"></md-tab>
+
+    <!-- Kết quả -->
+    <md-tab label="Kết quả" ng-disabled="tabs.tab5Locked"></md-tab>
+
+</md-tabs>

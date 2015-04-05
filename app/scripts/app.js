@@ -103,7 +103,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $mdIconProvider) {
         .icon('user', 'images/svg/ic_account_circle_24px.svg')
 
 
-}).run(function ($mdSidenav, $rootScope) {
+}).run(function ($mdSidenav, $rootScope, $log) {
 
     $rootScope.toggleLeft = function () {
         $mdSidenav('leftMenu').toggle()
@@ -131,7 +131,7 @@ app
         ];
         $scope.goState = function (link) {
             $state.go(link);
-        }
+        };
         $scope.close = function () {
             $mdSidenav('leftMenu').close()
                 .then(function () {
