@@ -1,1 +1,15 @@
-Quan ly chien dich
+<div layout="row" padding>
+    <md-button class="md-primary md-raised md-hue-2" ng-click="createCampaign($event)">
+        TẠO CHIẾN DỊCH
+    </md-button>
+</div>
+
+<div>
+    <md-list>
+        <md-subheader class="md-no-sticky">Danh sách chiến dịch</md-subheader>
+        <md-list-item ng-repeat="campaign in campaigns" layout="row" layout-align="center start">
+            <p> {{ campaign.name }} </p>
+            <p><md-button class="md-primary" ng-click="removeCampaign(campaign._id)">Xoá</md-button></p>
+        </md-list-item>
+    </md-list>
+</div>

@@ -17,12 +17,13 @@ var app = angular
         'ngRoute',
         'ngSanitize',
         'ngTouch',
-        'ngMaterial'
+        'ngMaterial',
+        'btford.socket-io'
     ]);
 
 app.config(function ($stateProvider, $urlRouterProvider, $mdIconProvider) {
 
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/campaign');
 
     // Setup State
     $stateProvider
@@ -31,7 +32,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $mdIconProvider) {
             templateUrl: 'views/home.html'
         })
         .state('campaign', {
-            url: '/',
+            url: '/campaign',
             templateUrl: "/views/campaign.html",
             controller: 'CampaignCtrl'
         })
@@ -103,12 +104,57 @@ app.config(function ($stateProvider, $urlRouterProvider, $mdIconProvider) {
         .icon('user', 'images/svg/ic_account_circle_24px.svg')
 
 
-}).run(function ($mdSidenav, $rootScope, $log, $fb) {
+}).run(function ($mdSidenav, $rootScope, $log, $fb, $server) {
+
+    // Info User
+    $rootScope.user = {
+        id: '55226b73529523560a73f96d',
+        username: 'tung',
+        token: 'abcde'
+    };
 
     // Set AppId Facebook & Init SDK Facebook
-    $fb.setAppId('123213213');
+
     $fb.init();
-    console.log('Facebook AppID: ', $fb.getAppId());
+    $server.getLongToken($rootScope.user.id)
+        .success(function (data) {
+            console.log("DATA APP:", data);
+            if (data.hasOwnProperty('status')) {
+                $fb.query(function (FB) {
+                    FB.getLoginStatus(function (response) {
+                        if (response.status === 'connected') {
+                            console.log('Facebook: Logged in.');
+                            var uid = response.authResponse.userID;
+                            var accessToken = response.authResponse.accessToken;
+                            console.log("Access Token", accessToken, uid);
+                            $server.setLongToken({'token': accessToken, idUser: $rootScope.user.id})
+                                .success(function (data) {
+                                    console.log("Save status:", data);
+                                })
+                                .error(function (err) {
+                                    console.log("Error status:", err);
+                                });
+                        }
+                        else {
+                            FB.login();
+                            $state.go($state.current, {}, {reload: true});
+                        }
+
+                    });
+                });
+
+
+            } else {
+
+            }
+
+        })
+        .error(function (err) {
+            console.log("Error get long token:", err)
+        });
+
+
+
 
     // Implement toggle Menu
     $rootScope.toggleLeft = function () {

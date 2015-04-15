@@ -1,1 +1,16 @@
-setting
+<div layout="column" padding>
+    <md-content layout-padding>
+        <form name="settingForm">
+            {{status}}
+            <div layout layout-sm="column">
+                <md-input-container style="width:80%">
+                    <label>Sessions Facebook</label>
+                    <input ng-model="tokenFB" disabled>
+                </md-input-container>
+                <md-input-container flex>
+                    <md-button class="md-raised md-primary" ng-click="removeSession(idUser)">Xoá Sessions</md-button>
+                </md-input-container>
+            </div>
+        </form>
+    </md-content>
+</div>

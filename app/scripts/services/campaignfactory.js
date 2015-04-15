@@ -8,7 +8,7 @@
  * Factory in the ifacebookApp.
  */
 angular.module('ifacebookApp')
-  .factory('CampaignFactory', function () {
+  .factory('CampaignFactory', function ($http) {
     // Service logic
     // ...
 
@@ -16,6 +16,9 @@ angular.module('ifacebookApp')
 
     // Public API here
     return {
+      createCampaign: function (name) {
+
+      },
       datas: [
         {name:'Thời trang Nam', value:'thoi-trang-nam'},
         {name:'Thời Trang Nữ', value:'thoi-trang-nu'},
