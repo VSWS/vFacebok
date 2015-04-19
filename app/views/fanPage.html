@@ -39,7 +39,7 @@
                 <md-content>
                     <h4>Danh sách Pages:</h4>
                     <table>
-                        <tr ng-repeat="page in pages | filter: {Campaign: idCampaign}" ng-click="getFeed(page.idPage, page._id); nextTab();">
+                        <tr ng-repeat="page in pages | filter: {Campaign: idCampaign}" ng-click="getFeed(page.username, page._id); nextTab();">
                             <td style="cursor: pointer">- {{page.name}}</td>
                         </tr>
                     </table>
@@ -87,12 +87,9 @@
                 <th>Đã lấy / Tổng Comments</th>
                 <th>Action</th>
             </tr>
-<<<<<<< HEAD
-            <tr ng-repeat="item in feed track by $index">
-=======
+
             <tr ng-repeat="item in feed.data track by $index">
                 <td style="padding: 3px 5px;">{{$index+1}}</td>
->>>>>>> 6fb18c8036f2bcaf3aef4b381e3a76ceeab41326
                 <td style="padding: 3px 5px;">{{item.created_time}}</td>
                 <td style="padding: 3px 5px;">{{item.id}}</td>
                 <td style="padding: 3px 5px; text-align: center;">0 / {{item.likes.summary.total_count}}</td>
