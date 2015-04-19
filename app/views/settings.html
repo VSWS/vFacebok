@@ -21,7 +21,7 @@
                 <th>Trạng thái</th>
                 <th>Xác nhận</th>
             </tr>
-            <tr ng-repeat="user in uFbs.datas">
+            <tr ng-repeat="user in uFbs">
                 <td>{{user.user_facebook}}</td>
                 <td>{{user.pass_facebook}}</td>
                 <td>{{(user.status == true) ? 'OK' : "Block"}}</td>

@@ -21,8 +21,8 @@ angular.module('ifacebookApp')
             };
             $scope.uFbs.push(
                 {
-                    user: $scope.uFb.user,
-                    pass: $scope.uFb.pass,
+                    user_facebook: uFb.user,
+                    pass_facebook: uFb.pass,
                     status: "Chưa kích hoạt"
                 }
             );
@@ -39,7 +39,7 @@ angular.module('ifacebookApp')
             $server.getUFB(idUser)
                 .success(function (datas) {
                     console.log("Datas FB User:", datas);
-                    $scope.uFbs = datas;
+                    $scope.uFbs = datas.datas;
                 })
                 .error(function (err) {
                     console.log("Error:", err);
