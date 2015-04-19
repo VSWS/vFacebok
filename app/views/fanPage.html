@@ -85,7 +85,7 @@
                 <th>Đã lấy / Tổng Likes</th>
                 <th>Đã lấy / Tổng Comments</th>
             </tr>
-            <tr ng-repeat="item in feed.data track by $index">
+            <tr ng-repeat="item in feed track by $index">
                 <td style="padding: 3px 5px;">{{item.created_time}}</td>
                 <td style="padding: 3px 5px;">{{item.id}}</td>
                 <td style="padding: 3px 5px; text-align: center;">0 / {{item.likes.summary.total_count}}</td>

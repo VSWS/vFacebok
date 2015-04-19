@@ -104,7 +104,7 @@ angular.module('ifacebookApp')
             $server.getFeeds(node, idPage)
                 .success(function (data) {
                     console.log("Data FEED:", data);
-                    $scope.feed = data;
+                    $scope.feed = data.data;
 
                 })
                 .error(function (err) {
