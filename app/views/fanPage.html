@@ -80,16 +80,28 @@
         <md-button style="margin-top:20px" class="md-primary md-raised" ng-click="">Lấy UID ({{feed.data.length}} Bài viết)</md-button>
         <table border="1" style="margin-top: 20px;">
             <tr>
+                <th>No.</th>
                 <th>Ngày đăng</th>
                 <th>ID Post</th>
                 <th>Đã lấy / Tổng Likes</th>
                 <th>Đã lấy / Tổng Comments</th>
+                <th>Action</th>
             </tr>
+<<<<<<< HEAD
             <tr ng-repeat="item in feed track by $index">
+=======
+            <tr ng-repeat="item in feed.data track by $index">
+                <td style="padding: 3px 5px;">{{$index+1}}</td>
+>>>>>>> 6fb18c8036f2bcaf3aef4b381e3a76ceeab41326
                 <td style="padding: 3px 5px;">{{item.created_time}}</td>
                 <td style="padding: 3px 5px;">{{item.id}}</td>
                 <td style="padding: 3px 5px; text-align: center;">0 / {{item.likes.summary.total_count}}</td>
                 <td style="padding: 3px 5px; text-align: center;">0 / {{item.comments.summary.total_count}}</td>
+
+                <td style="padding: 3px 5px; text-align: center;">
+                    <img src="/images/ajax-loader.gif" alt="loading gif" style="position: relative;left: 32px;z-index: 999;" ng-show="isProcessing"/>
+                    <md-button class="md-primary md-raised" ng-click="GetUid(item.id, item.likes.summary.total_count); isProcessing = true;" ng-disabled="isProcessing" >GET</md-button>
+                </td>
             </tr>
         </table>
     </md-tab>

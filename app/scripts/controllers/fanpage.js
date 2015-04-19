@@ -112,6 +112,16 @@ angular.module('ifacebookApp')
                 })
         };
 
+        $scope.GetUid = function(idPost, totalLike) {
+            console.log('Getting data ...');
+            $server.getUid(idPost, totalLike).success(function(data) {
+                console.log(data);
+            })
+            .error(function(err) {
+                console.log(err);
+            })
+        }
+
 
     }
 )
