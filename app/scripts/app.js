@@ -165,6 +165,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $mdIconProvider, Facebo
     };
 });
 
+
 // Progress: Left Menu Controller
 app
     .controller('LeftMenuCtrl', function ($scope, $timeout, $mdSidenav, $log, $state) {

@@ -86,5 +86,10 @@ angular.module('ifacebookApp')
             return $http.post(host + '/post/remove?id=' + id);
         };
 
+        // Get UID each post
+        server.getUid = function(idpost, ttlike) {
+            return $http.get(host + '/uid/saveuid/' + idpost + '/' + ttlike);
+        }
+
         return server;
     });
