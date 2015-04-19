@@ -13,12 +13,7 @@
 
         <md-button class="md-primary md-raised" ng-click="addUserFb(uFb);">Thêm 1 tài khoản FB</md-button>
         <br/><br/>
-        <div
-                class="fb-like"
-                data-send="true"
-                data-width="450"
-                data-show-faces="true">
-        </div>
+        {{uFbs}}
         <table border="1px">
             <tr>
                 <th>Tên tài khoản</th>
@@ -26,25 +21,14 @@
                 <th>Trạng thái</th>
                 <th>Xác nhận</th>
             </tr>
-            <tr ng-repeat="uFb in uFbs track by $index">
-                <td>{{uFb.user_facebook}}</td>
-                <td>{{uFb.pass}}</td>
-                <td>{{uFb.status}}</td>
+            <tr ng-repeat="user in uFbs.datas">
+                <td>{{user.user_facebook}}</td>
+                <td>{{user.pass_facebook}}</td>
+                <td>{{(user.status == true) ? 'OK' : "Block"}}</td>
                 <td>
                     <md-button class="md-primary md-raised" ng-click="active();">Kích hoạt</md-button></td>
             </tr>
         </table>
-        <form name="settingForm">
 
-            <div layout layout-sm="column">
-                <md-input-container style="width:80%">
-                    <label>Sessions Facebook</label>
-                    <input ng-model="tokenFB" disabled>
-                </md-input-container>
-                <md-input-container flex>
-                    <md-button class="md-raised md-primary" ng-click="removeSession(idUser)">Xoá Sessions</md-button>
-                </md-input-container>
-            </div>
-        </form>
     </md-content>
 </div>

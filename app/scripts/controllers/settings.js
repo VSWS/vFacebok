@@ -69,7 +69,6 @@ angular.module('ifacebookApp')
                             })
                         });
 
-
                     });
                     $scope.loggedIn = true;
                 } else {
