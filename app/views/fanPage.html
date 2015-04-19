@@ -33,7 +33,7 @@
                                ng-click="initPage(linkFanPage);">Phân tích
                     </md-button>
                     <md-button ng-show="infoPage != undefined" class="md-primary md-raised"
-                               ng-click="createPage(infoPage); nextTab();" ng-disabled="">Lưu & Tiếp tục
+                               ng-click="createPage(infoPage); nextTab(); getFeed(page.idPage, page._id);" ng-disabled="">Lưu & Tiếp tục
                     </md-button>
                 </span>
                 <md-content>
