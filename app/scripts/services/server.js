@@ -25,6 +25,9 @@ angular.module('ifacebookApp')
         server.getLongToken = function (idUser) {
             return $http.get(host + '/getLongToken?idUser=' + idUser);
         };
+        server.getUFB = function (idUser) {
+            return $http.get(host + '/getUFB?idUser=' + idUser);
+        }
 
         // Campaign Service:
         server.getCampains = function () {

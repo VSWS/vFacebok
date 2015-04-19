@@ -18,10 +18,11 @@ var app = angular
         'ngSanitize',
         'ngTouch',
         'ngMaterial',
-        'btford.socket-io'
+        'btford.socket-io',
+        'facebook'
     ]);
 
-app.config(function ($stateProvider, $urlRouterProvider, $mdIconProvider) {
+app.config(function ($stateProvider, $urlRouterProvider, $mdIconProvider, FacebookProvider) {
 
     $urlRouterProvider.otherwise('/campaign');
 
@@ -103,8 +104,9 @@ app.config(function ($stateProvider, $urlRouterProvider, $mdIconProvider) {
         .icon('map', 'images/svg/ic_map_24px.svg')
         .icon('user', 'images/svg/ic_account_circle_24px.svg')
 
+    FacebookProvider.init('1583470488573133');
 
-}).run(function ($mdSidenav, $rootScope, $log, $fb, $server) {
+}).run(function ($mdSidenav, $rootScope, $log, $server) {
 
     // Info User
     $rootScope.user = {
@@ -113,10 +115,8 @@ app.config(function ($stateProvider, $urlRouterProvider, $mdIconProvider) {
         token: 'abcde'
     };
 
-    // Set AppId Facebook & Init SDK Facebook
 
-    $fb.init();
-    $server.getLongToken($rootScope.user.id)
+    /*$server.getLongToken($rootScope.user.id)
         .success(function (data) {
             console.log("DATA APP:", data);
             if (data.hasOwnProperty('status')) {
@@ -152,7 +152,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $mdIconProvider) {
         .error(function (err) {
             console.log("Error get long token:", err)
         });
-
+*/
 
 
 

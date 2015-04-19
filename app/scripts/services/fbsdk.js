@@ -30,16 +30,26 @@ angular.module('ifacebookApp')
 
             query: function (callback) {
 
-                return window.fbAsyncInit = function () {
-                    console.log("INIT FACEBOOK!")
+                window.fbAsyncInit = function() {
                     FB.init({
-                        appId: AppId,
-                        xfbml: true,
-                        version: 'v2.3'
+                        appId      : AppId,
+                        xfbml      : true,
+                        version    : 'v2.3'
                     });
-
+                    console.log("Run FB")
+                    FB.getLoginStatus(function(response) {
+                        if (response.status === 'connected') {
+                            console.log('Logged in.');
+                        }
+                        else {
+                            console.log("show login");
+                            FB.login();
+                        }
+                    });
                     callback(FB);
+
                 };
+
             }
         }
     });

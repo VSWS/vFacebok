@@ -2,7 +2,6 @@
 
     <!-- Chiến Dịch-->
     <md-tab label="Chiến dịch">
-        <div class="fb-like" data-send="true" data-width="450" data-show-faces="true"></div>
 
         <h4>Lựa chọn chiến dịch:</h4>
 
@@ -12,42 +11,87 @@
                 <md-option ng-value="campaign" ng-repeat="campaign in campaigns">{{campaign.name}}</md-option>
             </md-select>
             <div ng-if="selectedCampaign != undefined" layout="row" layout-padding>
-                <md-button class="md-primary md-raised" ng-click="nextTab(); cacheIdCampaign(selectedCampaign._id)" ng-disabled="">Tiếp tục</md-button>
+                <md-button class="md-primary md-raised" ng-click="nextTab(); cacheIdCampaign(selectedCampaign._id);loadPages();"
+                           ng-disabled="">Tiếp tục
+                </md-button>
             </div>
 
         </div>
     </md-tab>
 
     <!-- Khởi tạo -->
-    <md-tab label="Khởi tạo" ng-disabled="tabs.tab2Locked">
-        <h4>Thêm một Fanpage:</h4>
-        <md-input-container>
-            <label>Link Fanpage</label>
-            <input ng-model="linkFanPage">
-        </md-input-container>
-        <md-button ng-show="infoPage == undefined" class="md-primary md-raised" ng-click="initPage(linkFanPage);">Phân tích</md-button>
-        <md-button ng-show="infoPage != undefined" class="md-primary md-raised" ng-click="createPage(infoPage); nextTab()" ng-disabled="">Lưu & Tiếp tục</md-button>
-        <md-content>
-            {{infoPage || JSON}}
-            <ul>
-                <li ng-repeat="page in pages"><a href="" ng-click="loadFeed(page.idPage, page._id); nextTab()">{{page.name}}</a></li>
-            </ul>
-            {{pages}}
-        </md-content>
+    <md-tab label="FanPages" ng-disabled="tabs.tab2Locked">
+        <div layout="row">
+            <div flex>
+                <span ng-show="idCampaign">
+                    <h4>Thêm một Fanpage:</h4>
+                    <md-input-container>
+                        <label>Link Fanpage</label>
+                        <input ng-model="linkFanPage">
+                    </md-input-container>
+                    <md-button ng-show="infoPage == undefined" class="md-primary md-raised"
+                               ng-click="initPage(linkFanPage);">Phân tích
+                    </md-button>
+                    <md-button ng-show="infoPage != undefined" class="md-primary md-raised"
+                               ng-click="createPage(infoPage); nextTab();" ng-disabled="">Lưu & Tiếp tục
+                    </md-button>
+                </span>
+                <md-content>
+                    <h4>Danh sách Pages:</h4>
+                    <table>
+                        <tr ng-repeat="page in pages | filter: {Campaign: idCampaign}" ng-click="getFeed(page.idPage, page._id); nextTab();">
+                            <td style="cursor: pointer">- {{page.name}}</td>
+                        </tr>
+                    </table>
+
+                </md-content>
+            </div>
+            <div flex padding>
+                <h4>Phân tích FanPage:</h4>
+                <table ng-show="infoPage">
+                    <tr>
+                        <td>idPage:</td>
+                        <td>{{infoPage.idPage}}.</td>
+                    </tr>
+                    <tr>
+                        <td>Tên:</td>
+                        <td>{{infoPage.name}}.</td>
+                    </tr>
+                    <tr>
+                        <td>Tên tài khoản:</td>
+                        <td>{{infoPage.username}}.</td>
+                    </tr>
+                    <tr>
+                        <td>Tổng số Likes:</td>
+                        <td>{{infoPage.likes}}.</td>
+                    </tr>
+                    <tr>
+                        <td>Link Facebook:</td>
+                        <td><a href="{{infoPage.link}}">{{infoPage.link}}</a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </md-tab>
 
     <!-- Feed -->
     <md-tab label="Feed" ng-disabled="tabs.tab3Locked">
-        <md-button class="md-primary md-raised" ng-click="analytic()">Get Posts</md-button>
-        <md-list>
-            <md-subheader class="md-no-sticky">3 line item</md-subheader>
-            <md-list-item class="md-3-line" ng-repeat="item in feed">
-                <div class="md-list-item-text">
-                    <h3>{{ item.idPost }}</h3>
-                    <p>{{ item.totalLike }}</p>
-                    <p>{{ item.totalComment }}</p>
-                </div>
-            </md-list-item>
+        <md-button style="margin-top:20px" class="md-primary md-raised" ng-click="">Chọn tài khoản</md-button>
+        <md-button style="margin-top:20px" class="md-primary md-raised" ng-click="">Lấy UID ({{feed.data.length}} Bài viết)</md-button>
+        <table border="1" style="margin-top: 20px;">
+            <tr>
+                <th>Ngày đăng</th>
+                <th>ID Post</th>
+                <th>Đã lấy / Tổng Likes</th>
+                <th>Đã lấy / Tổng Comments</th>
+            </tr>
+            <tr ng-repeat="item in feed.data track by $index">
+                <td style="padding: 3px 5px;">{{item.created_time}}</td>
+                <td style="padding: 3px 5px;">{{item.id}}</td>
+                <td style="padding: 3px 5px; text-align: center;">0 / {{item.likes.summary.total_count}}</td>
+                <td style="padding: 3px 5px; text-align: center;">0 / {{item.comments.summary.total_count}}</td>
+            </tr>
+        </table>
     </md-tab>
 
     <!-- Xử lý -->

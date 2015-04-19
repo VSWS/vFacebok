@@ -11,7 +11,7 @@ angular.module('ifacebookApp')
     .controller('CampaignCtrl', function ($scope, $rootScope, $mdDialog, $server) {
         $rootScope.titleHeader = "Chiến dịch";
 
-
+        $rootScope.campaigns = [];
 
         getCampains();
 
@@ -19,7 +19,7 @@ angular.module('ifacebookApp')
             console.log("Running Test Get Campaign:");
             $server.getCampains()
                 .success(function (data) {
-                        $scope.campaigns = data;
+                    $scope.campaigns = data;
                 })
                 .error(function (err) {
                     $scope.status = 'Unable to load data:' + err;
@@ -37,40 +37,23 @@ angular.module('ifacebookApp')
                 })
         };
 
-        $scope.createCampaign = function (ev) {
+        $scope.createCampaign = function () {
             // Appending dialog to document.body to cover sidenav in docs app
             // Modal dialogs should fully cover application
             // to prevent interaction outside of dialog
-            $mdDialog.show(
-                {
-                    controller: CreateCampaignCtrl,
-                    templateUrl: '../views/partials/dialogCreateCampaign.html',
-                    targetEvent: ev
-                }
-            );
+
+            var obj = {
+                name: $scope.nameCampaign,
+                idUser: $rootScope.user.id
+            };
+
+            console.log("Campaigns:", $scope.campaigns);
+            $scope.campaigns.push(obj);
+            $server.createCampaign(obj);
+            $scope.nameCampaign = '';
+
         };
 
-        function CreateCampaignCtrl($scope, $mdDialog, $server) {
 
-            console.log("Dialog is enable;");
-
-            $scope.cancel = function () {
-                $mdDialog.cancel();
-            };
-
-            $scope.created = function (nameCampaign) {
-                console.log("name Campaign:", nameCampaign);
-
-                var obj = {
-                    name: nameCampaign,
-                    idUser: $rootScope.user.id
-                };
-
-                $server.createCampaign(obj);
-                getCampains();
-
-                $mdDialog.hide();
-            };
-        }
 
     });

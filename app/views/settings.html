@@ -1,7 +1,41 @@
 <div layout="column" padding>
     <md-content layout-padding>
+        <div layout="row">
+            <md-input-container flex>
+                <label>Tài khoản</label>
+                <input ng-model="uFb.user">
+            </md-input-container>
+            <md-input-container flex>
+                <label>Mật khẩu</label>
+                <input ng-model="uFb.pass"/>
+            </md-input-container>
+        </div>
+
+        <md-button class="md-primary md-raised" ng-click="addUserFb(uFb);">Thêm 1 tài khoản FB</md-button>
+        <br/><br/>
+        <div
+                class="fb-like"
+                data-send="true"
+                data-width="450"
+                data-show-faces="true">
+        </div>
+        <table border="1px">
+            <tr>
+                <th>Tên tài khoản</th>
+                <th>Mật khẩu</th>
+                <th>Trạng thái</th>
+                <th>Xác nhận</th>
+            </tr>
+            <tr ng-repeat="uFb in uFbs track by $index">
+                <td>{{uFb.user_facebook}}</td>
+                <td>{{uFb.pass}}</td>
+                <td>{{uFb.status}}</td>
+                <td>
+                    <md-button class="md-primary md-raised" ng-click="active();">Kích hoạt</md-button></td>
+            </tr>
+        </table>
         <form name="settingForm">
-            {{status}}
+
             <div layout layout-sm="column">
                 <md-input-container style="width:80%">
                     <label>Sessions Facebook</label>

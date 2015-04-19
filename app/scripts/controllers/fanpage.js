@@ -8,7 +8,7 @@
  * Controller of the ifacebookApp
  */
 angular.module('ifacebookApp')
-    .controller('FanPageCtrl', function ($scope, $rootScope, $fb, $server, $timeout) {
+    .controller('FanPageCtrl', function ($scope, $rootScope, $fb, $server, $timeout, $mdDialog) {
 
         console.log("Controller: FanPage Loading");
 
@@ -49,14 +49,16 @@ angular.module('ifacebookApp')
             $scope.idCampaign = v;
         };
 
-        // 2. Xử lý tab: `Khởi Tạo`
+        // 2. Xử lý tab: `FanPages`
         //console.log("FB Token:", $cookies.get('fbToken'));
-        loadPages();
-        function loadPages() {
+        $scope.pages = [];
+
+        //loadPages();
+         $scope.loadPages = function () {
             $server.getPages()
                 .success(function (datas) {
                     $scope.pages = datas;
-                    console.log(datas);
+                    console.log("pageID:", $scope.idCampaign, datas);
                 })
                 .error(function (err) {
                     $scope.status = err;
@@ -76,11 +78,11 @@ angular.module('ifacebookApp')
                     $scope.status('Unable loading from server:', err);
                 })
         };
-
-        $scope.createPage = function (info) {
-            var page = info;
+        $scope.alert = '';
+        $scope.createPage = function () {
+            var page = $scope.infoPage;
             page.idCampaign = $scope.idCampaign;
-            console.log('Campaign selected: ', page);
+            console.log('Campaign selected: ', $scope.idCampaign, page);
             $server.createPage(page)
                 .success(function (data) {
                     console.log("Data", data);
@@ -94,24 +96,23 @@ angular.module('ifacebookApp')
                 });
         };
 
+
         /// Getting FEED
         $scope.feed = [];
-        $scope.loadFeed = function (node, idPage) {
+        $scope.getFeed = function (node, idPage) {
             console.log("Node:", node, "- idPage:", idPage);
             $server.getFeeds(node, idPage)
                 .success(function (data) {
                     console.log("Data FEED:", data);
-                    $timeout(function () {
-                        console.log("Apply FEED!");
-                        $scope.feed = data;
-                        $scope.$apply()
-                    },100);
+                    $scope.feed = data;
 
-                    })
+                })
                 .error(function (err) {
                     console.log("Server error:", err)
                 })
         };
 
 
-    });
+    }
+)
+;
