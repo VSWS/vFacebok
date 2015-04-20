@@ -75,10 +75,10 @@
     </md-tab>
 
     <!-- Feed -->
-    <md-tab label="Feed" ng-disabled="tabs.tab3Locked">
+    <md-tab label="Feed" ng-disabled="tabs.tab3Locked" style="width:100%;">
         <md-button style="margin-top:20px" class="md-primary md-raised" ng-click="">Chọn tài khoản</md-button>
         <md-button style="margin-top:20px" class="md-primary md-raised" ng-click="">Lấy UID ({{feed.data.length}} Bài viết)</md-button>
-        <table border="1" style="margin-top: 20px;">
+        <table border="1" style="margin-top: 20px; width: 100%;">
             <tr>
                 <th>No.</th>
                 <th>Ngày đăng</th>
@@ -101,7 +101,15 @@
                 </td>
             </tr>
         </table>
+
+        <div class="center">
+            <p style="text-align: center;">
+                <md-button class="md-primary md-raised" ng-click="LoadMorePost(feed.paging.next)">LOAD MORE</md-button>
+            </p> 
+        </div>
     </md-tab>
+
+
 
     <!-- Xử lý -->
     <md-tab label="UID" ng-disabled="tabs.tab4Locked"></md-tab>

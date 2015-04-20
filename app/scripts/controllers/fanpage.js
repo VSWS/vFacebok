@@ -122,7 +122,16 @@ angular.module('ifacebookApp')
             })
         }
 
+        $scope.LoadMorePost = function(paging) {
+            $server.loadmorePost(paging).success(function(morefeeds) {
+
+                $scope.feed.paging.next = morefeeds.paging.next;
+                morefeeds.data.forEach(function(ele) {
+                    $scope.feed.data.push(ele);
+                })
+            })
+        }
+
 
     }
-)
-;
+);

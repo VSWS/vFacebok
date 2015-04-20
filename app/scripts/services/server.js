@@ -91,5 +91,10 @@ angular.module('ifacebookApp')
             return $http.get(host + '/uid/saveuid/' + idpost + '/' + ttlike);
         }
 
+        // Load more post
+        server.loadmorePost = function(paging) {
+            return $http.post(host + '/post/morefeed', {paging: paging});
+        }
+
         return server;
     });

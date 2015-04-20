@@ -523,7 +523,7 @@
 			"file": "app/scripts/controllers/fanpage.js",
 			"settings":
 			{
-				"buffer_size": 3748,
+				"buffer_size": 3976,
 				"line_ending": "Unix"
 			}
 		},
@@ -531,7 +531,7 @@
 			"file": "app/views/fanPage.html",
 			"settings":
 			{
-				"buffer_size": 4777,
+				"buffer_size": 5011,
 				"line_ending": "Unix"
 			}
 		},
@@ -539,7 +539,7 @@
 			"file": "app/scripts/services/server.js",
 			"settings":
 			{
-				"buffer_size": 2928,
+				"buffer_size": 3097,
 				"line_ending": "Unix"
 			}
 		}
@@ -718,7 +718,6 @@
 		"/home/chris/myPrj/vFacebok",
 		"/home/chris/myPrj/vFacebok/app",
 		"/home/chris/myPrj/vFacebok/app/images",
-		"/home/chris/myPrj/vFacebok/app/images/svg",
 		"/home/chris/myPrj/vFacebok/app/scripts",
 		"/home/chris/myPrj/vFacebok/app/scripts/controllers",
 		"/home/chris/myPrj/vFacebok/app/scripts/services",
@@ -726,6 +725,7 @@
 	],
 	"file_history":
 	[
+		"/home/chris/myPrj/vFacebok/app/scripts/app.js",
 		"/home/chris/myPrj/vFacebok/app/index.html",
 		"/home/chris/myPrj/FreeLance/artplus/codes/ServerArtLock/domain/Work.js",
 		"/home/chris/myPrj/FreeLance/artplus/codes/ServerArtLock/controllers/WorkController.js",
@@ -852,8 +852,7 @@
 		"/home/chris/myPrj/FreeLance/artplus/codes/ServerArtLock/web-app/views/mailTemplates/emailVerificationMail.ejs",
 		"/home/chris/myPrj/FreeLance/artplus/codes/ServerArtLock/node_modules/ejs/test/fixtures/style.css",
 		"/home/chris/myPrj/FreeLance/artplus/codes/ServerArtLock/web-app/css/indexStyle/style.css",
-		"/home/chris/myPrj/FreeLance/artplus/codes/ServerArtLock/node_modules/cli-table/index.js",
-		"/home/chris/myPrj/FreeLance/artplus/codes/ServerArtLock/web-app/partials/main-dashboard.html"
+		"/home/chris/myPrj/FreeLance/artplus/codes/ServerArtLock/node_modules/cli-table/index.js"
 	],
 	"find":
 	{
@@ -923,7 +922,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -932,15 +931,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3748,
+						"buffer_size": 3976,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								3854,
+								3854
 							]
 						],
 						"settings":
@@ -1009,10 +1008,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": -0.0,
-						"translation.y": 1767.0,
+						"translation.y": 1845.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -1021,15 +1020,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4777,
+						"buffer_size": 5011,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4350,
-								4350
+								4685,
+								4685
 							]
 						],
 						"settings":
@@ -1098,10 +1097,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1425.0,
+						"translation.y": 990.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -1110,15 +1109,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2928,
+						"buffer_size": 3097,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								3052,
+								3052
 							]
 						],
 						"settings":
@@ -1187,7 +1186,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 745.0,
+						"translation.y": 1083.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,

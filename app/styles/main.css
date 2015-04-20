@@ -19,3 +19,10 @@
 /* END : Process Menu Left List */
 .inputdemoErrors .inputErrorsApp {
     min-height: 48px; }
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
