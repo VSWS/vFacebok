@@ -11,7 +11,7 @@ angular.module('ifacebookApp')
     .controller('CampaignCtrl', function ($scope, $rootScope, $mdDialog, $server) {
         $rootScope.titleHeader = "Chiến dịch";
 
-        $rootScope.campaigns = [];
+        $scope.campaigns = [];
 
         getCampains();
 
@@ -26,11 +26,13 @@ angular.module('ifacebookApp')
                 });
         }
 
-        $scope.removeCampaign = function (id) {
-            console.log("ID remove:", id);
-            $server.removeCampaign(id)
+        $scope.removeCampaign = function (index) {
+            console.log("ID remove:", index);
+            var campaign_delete = $scope.campaigns[index];
+            $server.removeCampaign(campaign_delete._id)
                 .success(function (data) {
                     console.log("Remove success:", data);
+                    $scope.campaigns.splice(index, 1);
                 })
                 .error(function (err) {
                     console.log('Unable to load data', err)

@@ -79,7 +79,17 @@ angular.module('ifacebookApp')
                     $scope.loggedIn = false;
                 }
             });
-
+        };
+        $scope.isUsed = function (index) {
+            var user_fb = $scope.uFbs[index];
+            console.log("User FB", user_fb);
+            $server.setUserFB(user_fb._id)
+                .success(function (data) {
+                    console.log("Set user facebook OK", data);
+                })
+                .error(function (err) {
+                    console.log("Set user facebook Error:", err);
+                })
         };
 
 

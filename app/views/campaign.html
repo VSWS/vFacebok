@@ -11,7 +11,7 @@
         <table layout="row" layout-align="center start">
             <tr ng-repeat="campaign in campaigns track by $index" >
                 <td style="width: 150px;">{{ campaign.name}} </td>
-                <td><md-button class="md-primary" ng-click="removeCampaign(campaign._id)">Xoá</md-button></td>
+                <td><md-button class="md-primary" ng-click="removeCampaign($index)">Xoá</md-button></td>
             </tr>
         </table>
 

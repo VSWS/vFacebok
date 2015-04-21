@@ -54,7 +54,7 @@ angular.module('ifacebookApp')
         $scope.pages = [];
 
         //loadPages();
-         $scope.loadPages = function () {
+        $scope.loadPages = function () {
             $server.getPages()
                 .success(function (datas) {
                     $scope.pages = datas;
@@ -85,7 +85,9 @@ angular.module('ifacebookApp')
             console.log('Campaign selected: ', $scope.idCampaign, page);
             $server.createPage(page)
                 .success(function (data) {
-                    console.log("Data", data);
+                    console.log("Data", data._id);
+                    $scope.getFeed($scope.infoPage.username, data._id);
+                    $scope.nextTab();
                     if (data.message) {
                         $scope.status = data.message;
                     }
@@ -99,28 +101,48 @@ angular.module('ifacebookApp')
 
         /// Getting FEED
         $scope.feed = [];
+
+        function autoLoad(idPage) {
+            $server.getPostsByPage(idPage)
+                .success(function (data) {
+                    console.log("Data Autoload:", data);
+                    if (data) {
+                        $scope.feed = data;
+                        setTimeout(function () {
+                            autoLoad(idPage);
+                        }, 3000)
+                    }
+
+                })
+                .error(function (err) {
+                    console.log(err);
+                })
+        }
+
         $scope.getFeed = function (node, idPage) {
             console.log("Node:", node, "- idPage:", idPage);
             $server.getFeeds(node, idPage)
                 .success(function (data) {
                     console.log("Data FEED:", data);
-                    $scope.feed = data;
-
+                    $scope.feed = data.data;
+                    autoLoad(idPage);
                 })
                 .error(function (err) {
                     console.log("Server error:", err)
                 })
         };
+        $scope.tokens = [];
 
-        $scope.GetUid = function(idPost, totalLike) {
-            console.log('Getting data ...');
-            $server.getUid(idPost, totalLike).success(function(data) {
+        $scope.GetUid = function (idPost, totalLike, token) {
+            console.log('Getting data ...', idPost, totalLike, token);
+            $server.getUid(idPost, totalLike, token).success(function (data) {
                 console.log(data);
             })
-            .error(function(err) {
-                console.log(err);
-            })
-        }
+                .error(function (err) {
+                    console.log(err);
+                })
+        };
+
 
         $scope.LoadMorePost = function(paging) {
             $server.loadmorePost(paging).success(function(morefeeds) {
@@ -130,8 +152,24 @@ angular.module('ifacebookApp')
                     $scope.feed.data.push(ele);
                 })
             })
-        }
+        };
 
+        $scope.loadUFB = function () {
+            // List Campaigns
+            $scope.UFBs = [];
+            $scope.selectedUFB = [];
 
+            return $timeout(function () {
+                $server.getAllUFB()
+                    .success(function (data) {
+                        $scope.UFBs = data;
+                        console.log("All UFB: ", $scope.UFBs);
+                        console.log("Selected UFB", $scope.selectedUFB);
+                    })
+                    .error(function (err) {
+                        $scope.status = 'Unable to load data:' + err;
+                    });
+            }, 500);
+        };
     }
 );

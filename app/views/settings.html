@@ -13,20 +13,24 @@
 
         <md-button class="md-primary md-raised" ng-click="addUserFb(uFb);">Thêm 1 tài khoản FB</md-button>
         <br/><br/>
-        {{uFbs}}
+
         <table border="1px">
             <tr>
                 <th>Tên tài khoản</th>
                 <th>Mật khẩu</th>
                 <th>Trạng thái</th>
-                <th>Xác nhận</th>
+                <th>Code</th>
+                <th>Action</th>
             </tr>
             <tr ng-repeat="user in uFbs">
                 <td>{{user.user_facebook}}</td>
                 <td>{{user.pass_facebook}}</td>
                 <td>{{(user.status == true) ? 'OK' : "Block"}}</td>
+                <td><textarea name="" id="" cols="30" rows="8">{{user.long_token}}</textarea></td>
                 <td>
-                    <md-button class="md-primary md-raised" ng-click="active();">Kích hoạt</md-button></td>
+                    <md-button class="md-primary md-raised" ng-click="active();">Kích hoạt</md-button>
+                    <md-button class="md-primary" ng-click="remove($index);">Xoá</md-button>
+                </td>
             </tr>
         </table>
 

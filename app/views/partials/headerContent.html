@@ -1,3 +1,4 @@
+
 <div class="left-header">
     <md-button ng-click="toggleLeft()" class="md-primary">
         <md-icon md-svg-icon="menu" alt="Menu "></md-icon>
@@ -5,6 +6,10 @@
     <span>{{titleHeader}}</span>
 </div>
 <div class="right-header">
-    <md-icon md-svg-icon="user"></md-icon>
-    Tung Nguyen
+    <md-input-container flex>
+        <label>Server:</label>
+        <input ng-model="server" placeholder="IP server">
+    </md-input-container>
+    <!--<md-icon md-svg-icon="user"></md-icon>-->
+    <!--Tung Nguyen-->
 </div>

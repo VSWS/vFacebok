@@ -33,7 +33,7 @@
                                ng-click="initPage(linkFanPage);">Phân tích
                     </md-button>
                     <md-button ng-show="infoPage != undefined" class="md-primary md-raised"
-                               ng-click="createPage(infoPage); nextTab(); getFeed(infoPage.username, infoPage.idPage);" ng-disabled="">Lưu & Tiếp tục
+                               ng-click="createPage(infoPage)" ng-disabled="">Lưu & Tiếp tục
                     </md-button>
                 </span>
                 <md-content>
@@ -76,35 +76,38 @@
 
     <!-- Feed -->
     <md-tab label="Feed" ng-disabled="tabs.tab3Locked" style="width:100%;">
-        <md-button style="margin-top:20px" class="md-primary md-raised" ng-click="">Chọn tài khoản</md-button>
-        <md-button style="margin-top:20px" class="md-primary md-raised" ng-click="">Lấy UID ({{feed.data.length}} Bài viết)</md-button>
+        <!--<md-button style="margin-top:20px" class="md-primary md-raised" ng-click="">Chọn tài khoản</md-button>-->
+        <!--<md-button style="margin-top:20px" class="md-primary md-raised" ng-click="">Lấy UID ({{feed.data.length}} Bài viết)</md-button>-->
         <table border="1" style="margin-top: 20px; width: 100%;">
             <tr>
                 <th>No.</th>
                 <th>Ngày đăng</th>
                 <th>ID Post</th>
-                <th>Đã lấy / Tổng Likes</th>
-                <th>Đã lấy / Tổng Comments</th>
+                <th>Đã lấy / UID</th>
                 <th>Action</th>
             </tr>
 
-            <tr ng-repeat="item in feed.data track by $index">
+            <tr ng-repeat="item in feed track by $index">
                 <td style="padding: 3px 5px;">{{$index+1}}</td>
                 <td style="padding: 3px 5px;">{{item.created_time}}</td>
-                <td style="padding: 3px 5px;">{{item.id}}</td>
-                <td style="padding: 3px 5px; text-align: center;">0 / {{item.likes.summary.total_count}}</td>
-                <td style="padding: 3px 5px; text-align: center;">0 / {{item.comments.summary.total_count}}</td>
-
+                <td style="padding: 3px 5px;">{{item.id || item.idPost }}</td>
+                <td style="padding: 3px 5px; text-align: center;"> {{item.hasUID || 0}} / {{item.likes.summary.total_count || item.totalLike}}</td>
                 <td style="padding: 3px 5px; text-align: center;">
+                    <!--<md-select ng-model="selectedUFB" md-on-open="loadUFB()" style="min-width: 100px;">-->
+                        <!--<md-select-label>{{ selectedUFB ? selectedUFB[].user_facebook : 'Chọn tài khoản' }}</md-select-label>-->
+                        <!--<md-option ng-value="UFB.access_token" ng-repeat="UFB in UFBs">{{UFB.user_facebook}}</md-option>-->
+                    <!--</md-select>-->
+                    <input type="text" ng-model="tokens[$index]"/>
+
                     <img src="/images/ajax-loader.gif" alt="loading gif" style="position: relative;left: 32px;z-index: 999;" ng-show="isProcessing"/>
-                    <md-button class="md-primary md-raised" ng-click="GetUid(item.id, item.likes.summary.total_count); isProcessing = true;" ng-disabled="isProcessing" >GET</md-button>
+                    <md-button class="md-primary md-raised" ng-click="GetUid(item.idPost, item.likes.summary.total_count || item.totalLike, tokens[$index]); isProcessing = true;" ng-disabled="isProcessing" >GET</md-button>
                 </td>
             </tr>
         </table>
 
         <div class="center">
             <p style="text-align: center;">
-                <md-button class="md-primary md-raised" ng-click="LoadMorePost(feed.paging.next)">LOAD MORE</md-button>
+                <!--<md-button class="md-primary md-raised" ng-click="LoadMorePost(feed.paging.next)">LOAD MORE</md-button>-->
             </p> 
         </div>
     </md-tab>
