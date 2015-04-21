@@ -90,7 +90,7 @@
             <tr ng-repeat="item in feed track by $index">
                 <td style="padding: 3px 5px;">{{$index+1}}</td>
                 <td style="padding: 3px 5px;">{{item.created_time}}</td>
-                <td style="padding: 3px 5px;">{{item.id || item.idPost }}</td>
+                <td style="padding: 3px 5px;"><a href="{{server}}/{{item.path}}" target="_blank">{{item.id || item.idPost }}</a></td>
                 <td style="padding: 3px 5px; text-align: center;"> {{item.hasUID || 0}} / {{item.likes.summary.total_count || item.totalLike}}</td>
                 <td style="padding: 3px 5px; text-align: center;">
                     <!--<md-select ng-model="selectedUFB" md-on-open="loadUFB()" style="min-width: 100px;">-->

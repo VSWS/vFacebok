@@ -36,7 +36,7 @@ angular.module('ifacebookApp')
 
         function getuFbs (idUser) {
 
-            $server.getUFB(idUser)
+            $server.getUFB(idUser, $rootScope.server)
                 .success(function (datas) {
                     console.log("Datas FB User:", datas);
                     $scope.uFbs = datas.datas;
@@ -48,9 +48,9 @@ angular.module('ifacebookApp')
 
         getuFbs(idUser);
 
-        $scope.active = function () {
+        $scope.active = function (index) {
 
-            console.log("Active Account facebook");
+            console.log("Active Account facebook", $scope.uFbs[index].user_facebook);
 
             // From now on you can use the Facebook service just as Facebook api says
             Facebook.getLoginStatus(function (response) {
@@ -59,14 +59,22 @@ angular.module('ifacebookApp')
                         console.log("Logout:", response);
                         Facebook.login(function (response) {
                             // Do something with response.
-                            console.log("login:", response)
+                            console.log("login:", response);
                             var short_token = response.authResponse.accessToken;
+                            console.log("Token:", short_token);
+
                             $server.setLongToken({
                                 'short_token': short_token,
-                                'userFb': uFb.user,
-                                'passFb': uFb.pass,
+                                'userFb': $scope.uFbs[index].user_facebook,
+                                'passFb': $scope.uFbs[index].pass_facebook,
                                 'idUser': $rootScope.user.id
                             })
+                                .success(function (data) {
+                                    console.log("Data Success", data);
+                                })
+                                .error(function (err) {
+                                    console.log("error save token", err);
+                                })
                         });
 
                     });
@@ -83,7 +91,7 @@ angular.module('ifacebookApp')
         $scope.isUsed = function (index) {
             var user_fb = $scope.uFbs[index];
             console.log("User FB", user_fb);
-            $server.setUserFB(user_fb._id)
+            $server.setUserFB(user_fb._id, $rootScope.server)
                 .success(function (data) {
                     console.log("Set user facebook OK", data);
                 })
@@ -96,7 +104,7 @@ angular.module('ifacebookApp')
 
         $scope.removeSession = function (idUser) {
             console.log("Remove idUser:", idUser);
-            $server.removeLongToken({'idUser': idUser})
+            $server.removeLongToken({'idUser': idUser}, $rootScope.server)
                 .success(function (data) {
                     console.log("Data remove success:", data);
                     $scope.tokenFB = null;

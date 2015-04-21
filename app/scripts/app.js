@@ -21,19 +21,10 @@ var app = angular
         'btford.socket-io',
         'facebook'
     ]);
-app.service(function ($http) {
-    $http.get('http://localhost:3000/getServerActive')
-        .success(function (data) {
-            console.log("Server Data:", data);
-            return $rootScope.server = data.server;
-        })
-        .error(function (err) {
-            alert("Server Is Error:", err);
-        });
-});
+
 app.config(function ($stateProvider, $urlRouterProvider, $mdIconProvider, FacebookProvider) {
 
-    $urlRouterProvider.otherwise('/home');
+    $urlRouterProvider.otherwise('/campaign');
 
     // Setup State
     $stateProvider
@@ -115,8 +106,15 @@ app.config(function ($stateProvider, $urlRouterProvider, $mdIconProvider, Facebo
 
     FacebookProvider.init('1583470488573133');
 
-}).run(function ($mdSidenav, $rootScope, $log) {
-
+}).run(function ($mdSidenav, $rootScope, $log, $http, $server) {
+    //$http.get('http://45.55.177.53:3000/getServerActive')
+    //    .success(function (data) {
+    //        console.log("Server Data:", data);
+    //        return $rootScope.server = data.server;
+    //    })
+    //    .error(function (err) {
+    //        alert("Server Is Error:", err);
+    //    });
     // Info User
     $rootScope.user = {
         id: '55226b73529523560a73f96d',
@@ -124,7 +122,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $mdIconProvider, Facebo
         token: 'abcde'
     };
 
-    //$server.checkServer();
+    //$server.checkServer($rootScope.server);
 
     /*$server.getLongToken($rootScope.user.id)
         .success(function (data) {

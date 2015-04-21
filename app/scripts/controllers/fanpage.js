@@ -35,7 +35,7 @@ angular.module('ifacebookApp')
             $scope.campaigns = [];
             $scope.selectedCampaign = {};
             return $timeout(function () {
-                $server.getCampains()
+                $server.getCampains($rootScope.server)
                     .success(function (data) {
                         $scope.campaigns = data;
                         console.log("Campaigns: ", $scope.campaigns);
@@ -55,7 +55,7 @@ angular.module('ifacebookApp')
 
         //loadPages();
         $scope.loadPages = function () {
-            $server.getPages()
+            $server.getPages($rootScope.server)
                 .success(function (datas) {
                     $scope.pages = datas;
                     console.log("pageID:", $scope.idCampaign, datas);
@@ -68,7 +68,7 @@ angular.module('ifacebookApp')
 
         $scope.initPage = function (node) {
             console.log("Page Node", node);
-            $server.initPage(node)
+            $server.initPage(node,$rootScope.server)
                 .success(function (data) {
                     console.log("Data init Page:", data);
                     $scope.infoPage = data;
@@ -83,7 +83,7 @@ angular.module('ifacebookApp')
             var page = $scope.infoPage;
             page.idCampaign = $scope.idCampaign;
             console.log('Campaign selected: ', $scope.idCampaign, page);
-            $server.createPage(page)
+            $server.createPage(page, $rootScope.server)
                 .success(function (data) {
                     console.log("Data", data._id);
                     $scope.getFeed($scope.infoPage.username, data._id);
@@ -103,7 +103,7 @@ angular.module('ifacebookApp')
         $scope.feed = [];
 
         function autoLoad(idPage) {
-            $server.getPostsByPage(idPage)
+            $server.getPostsByPage(idPage, $rootScope.server)
                 .success(function (data) {
                     console.log("Data Autoload:", data);
                     if (data) {

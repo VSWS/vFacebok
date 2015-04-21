@@ -8,12 +8,11 @@
  * Service in the ifacebookApp.
  */
 angular.module('ifacebookApp')
-
     .service('$server', function ($http, $mdDialog, $rootScope) {
         // AngularJS will instantiate a singleton by calling "new" on this functio
 
-
-        var host = $rootScope.server;
+        var host = "http://localhost:3000"; //"http://45.55.177.53:3000";
+        $rootScope.server = host;
         var server = {};
 
         // Check Server
