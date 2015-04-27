@@ -36,7 +36,7 @@ angular.module('ifacebookApp')
 
         function getuFbs (idUser) {
 
-            $server.getUFB(idUser, $rootScope.server)
+            $server.getUFB(idUser)
                 .success(function (datas) {
                     console.log("Datas FB User:", datas);
                     $scope.uFbs = datas.datas;
@@ -91,7 +91,7 @@ angular.module('ifacebookApp')
         $scope.isUsed = function (index) {
             var user_fb = $scope.uFbs[index];
             console.log("User FB", user_fb);
-            $server.setUserFB(user_fb._id, $rootScope.server)
+            $server.setUserFB(user_fb._id)
                 .success(function (data) {
                     console.log("Set user facebook OK", data);
                 })
@@ -100,27 +100,19 @@ angular.module('ifacebookApp')
                 })
         };
 
-
-
-        $scope.removeSession = function (idUser) {
-            console.log("Remove idUser:", idUser);
-            $server.removeLongToken({'idUser': idUser}, $rootScope.server)
-                .success(function (data) {
-                    console.log("Data remove success:", data);
-                    $scope.tokenFB = null;
-
-                    $fb.query(function (FB) {
-                        FB.logout(function (res) {
-                            console.log("Logout Facebook:", res);
-                        });
-                    });
-
-                    $state.go('campaign', {}, {reload: true});
-                })
-                .error(function (err) {
-                    console.log("error remove:", err);
-                })
+        $scope.removeFB = function (index) {
+            var user_fb = $scope.uFbs[index];
+            console.log(user_fb);
+          $server.removeFB(user_fb.user_facebook)
+              .success(function (data) {
+                  $scope.uFbs.splice(index, 1);
+                  console.log("Remove success user", data)
+              })
+              .error(function (err) {
+                  console.log("error remove user", err)
+              })
         };
+
 
         $scope.awesomeThings = [
             'HTML5 Boilerplate',

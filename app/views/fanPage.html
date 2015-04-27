@@ -33,17 +33,19 @@
                                ng-click="initPage(linkFanPage);">Phân tích
                     </md-button>
                     <md-button ng-show="infoPage != undefined" class="md-primary md-raised"
-                               ng-click="createPage(infoPage)" ng-disabled="">Lưu & Tiếp tục
+                               ng-click="createPage(infoPage);" ng-disabled="">Lưu & Tiếp tục
                     </md-button>
                 </span>
                 <md-content>
                     <h4>Danh sách Pages:</h4>
                     <table>
-                        <tr ng-repeat="page in pages | filter: {Campaign: idCampaign}" ng-click="getFeed(page.username, page._id); nextTab();">
-                            <td style="cursor: pointer">- {{page.name}}</td>
+                        <tr ng-repeat="page in pages | filter: {Campaign: data.idCampaign}" ng-click="showFeed(page.data.username, page.data._id);  setPageCurrent(); nextTab();">
+                            <td style="cursor: pointer">- {{page.data.name}} - (Tổng bài viết: {{page.count[0].countPosts}}) - (Tổng UID:
+                                {{page.count[0].hasUID | number}})</td>
                         </tr>
                     </table>
-
+                    <hr/>
+                    <h4 style="color: rgb(57,73,171)">Tổng số UID đã GET: {{totalUIDPage | number}}</h4>
                 </md-content>
             </div>
             <div flex padding>
@@ -87,11 +89,11 @@
                 <th>Action</th>
             </tr>
 
-            <tr ng-repeat="item in feed track by $index">
+            <tr ng-repeat="item in feed track by $index" ng-class="(item.lock) ? 'isLock' : 'unLock'">
                 <td style="padding: 3px 5px;">{{$index+1}}</td>
                 <td style="padding: 3px 5px;">{{item.created_time}}</td>
                 <td style="padding: 3px 5px;"><a href="{{server}}/{{item.path}}" target="_blank">{{item.id || item.idPost }}</a></td>
-                <td style="padding: 3px 5px; text-align: center;"> {{item.hasUID || 0}} / {{item.likes.summary.total_count || item.totalLike}}</td>
+                <td style="padding: 3px 5px; text-align: center;"> {{item.hasUID || 0}} / {{item.likes.summary.total_count || item.totalLike}} ({{ (( (item.hasUID || 0) / item.likes.summary.total_count) * 100) || (((item.hasUID || 0) / item.totalLike) * 100) | number:2 }}%)</td>
                 <td style="padding: 3px 5px; text-align: center;">
                     <!--<md-select ng-model="selectedUFB" md-on-open="loadUFB()" style="min-width: 100px;">-->
                         <!--<md-select-label>{{ selectedUFB ? selectedUFB[].user_facebook : 'Chọn tài khoản' }}</md-select-label>-->
@@ -99,8 +101,10 @@
                     <!--</md-select>-->
                     <input type="text" ng-model="tokens[$index]"/>
 
-                    <img src="/images/ajax-loader.gif" alt="loading gif" style="position: relative;left: 32px;z-index: 999;" ng-show="isProcessing"/>
-                    <md-button class="md-primary md-raised" ng-click="GetUid(item.idPost, item.likes.summary.total_count || item.totalLike, tokens[$index]); isProcessing = true;" ng-disabled="isProcessing" >GET</md-button>
+                    <!--<img src="/images/ajax-loader.gif" alt="loading gif" style="position: relative;left: 32px;z-index: 999;" ng-show="isProcessing"/>-->
+                    <md-button class="md-primary md-raised" ng-click="GetUid(item.idPost, item.likes.summary.total_count || item.totalLike, tokens[$index]); setLock($index)" ng-disabled="item.lock" >GET</md-button>
+                    <md-button class="md-primary md-raised" ng-hide="item.lock" ng-click="setLock($index)">Lock</md-button>
+                    <md-button class="md-primary md-raised" ng-show="item.lock" ng-click="unLock($index)">unLock</md-button>
                 </td>
             </tr>
         </table>

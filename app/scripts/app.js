@@ -24,17 +24,17 @@ var app = angular
 
 app.config(function ($stateProvider, $urlRouterProvider, $mdIconProvider, FacebookProvider) {
 
-    $urlRouterProvider.otherwise('/campaign');
+    $urlRouterProvider.otherwise('/home');
 
     // Setup State
     $stateProvider
         .state('home', {
-            url: '/home',
+            url: '/',
             templateUrl: 'views/home.html'
         })
         .state('campaign', {
             url: '/campaign',
-            templateUrl: "/views/campaign.html",
+            templateUrl: "views/campaign.html",
             controller: 'CampaignCtrl'
         })
         .state('graphSearch', {

@@ -52,19 +52,25 @@ angular.module('ifacebookApp')
         // 2. Xử lý tab: `FanPages`
         //console.log("FB Token:", $cookies.get('fbToken'));
         $scope.pages = [];
-
+        $scope.totalUIDPage = 0;
         //loadPages();
         $scope.loadPages = function () {
             $server.getPages($rootScope.server)
                 .success(function (datas) {
-                    $scope.pages = datas;
-                    console.log("pageID:", $scope.idCampaign, datas);
+                    datas.forEach(function (data) {
+                        $server.countPosts(data._id)
+                            .success(function (count) {
+                                $scope.pages.push({data: data, count: count});
+                                $scope.totalUIDPage = $scope.totalUIDPage + count[0].hasUID;
+                                console.log("List Page:", $scope.pages);
+                            })
+                    });
                 })
                 .error(function (err) {
                     $scope.status = err;
                     console.log(err);
                 });
-        }
+        };
 
         $scope.initPage = function (node) {
             console.log("Page Node", node);
@@ -79,6 +85,7 @@ angular.module('ifacebookApp')
                 })
         };
         $scope.alert = '';
+
         $scope.createPage = function () {
             var page = $scope.infoPage;
             page.idCampaign = $scope.idCampaign;
@@ -87,6 +94,9 @@ angular.module('ifacebookApp')
                 .success(function (data) {
                     console.log("Data", data._id);
                     $scope.getFeed($scope.infoPage.username, data._id);
+
+                    autoLoad(data._id);
+
                     $scope.nextTab();
                     if (data.message) {
                         $scope.status = data.message;
@@ -118,19 +128,28 @@ angular.module('ifacebookApp')
                     console.log(err);
                 })
         }
+        $scope.showFeed = function (node, idPage) {
+            console.log("Show Feed:", node, idPage);
+            autoLoad(idPage);
+        };
 
+        var nodeCachingLoad; // check username ko bi duplicate trang
         $scope.getFeed = function (node, idPage) {
             console.log("Node:", node, "- idPage:", idPage);
             $server.getFeeds(node, idPage)
                 .success(function (data) {
                     console.log("Data FEED:", data);
                     $scope.feed = data.data;
-                    autoLoad(idPage);
+                    if ( node == nodeCachingLoad) {
+                        autoLoad(idPage);
+                    }
+
                 })
                 .error(function (err) {
                     console.log("Server error:", err)
                 })
         };
+        
         $scope.tokens = [];
 
         $scope.GetUid = function (idPost, totalLike, token) {
@@ -143,6 +162,27 @@ angular.module('ifacebookApp')
                 })
         };
 
+        $scope.setLock = function (index) {
+            var post = $scope.feed[index];
+            $server.setLock(post.idPost)
+                .success(function (data) {
+                    console.log("set lock idPost", post.idPost, data);
+                })
+                .error(function (err) {
+                    console.log("error set lock idPost", post.idPost, err)
+                })
+        };
+
+        $scope.unLock = function (index) {
+            var post = $scope.feed[index];
+            $server.unLock(post.idPost)
+                .success(function (data) {
+                    console.log("set lock idPost", post.idPost, data);
+                })
+                .error(function (err) {
+                    console.log("error set lock idPost", post.idPost, err)
+                })
+        };
 
         $scope.LoadMorePost = function(paging) {
             $server.loadmorePost(paging).success(function(morefeeds) {

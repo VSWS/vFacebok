@@ -26,3 +26,7 @@
     width: 50%;
 }
 
+.isLock {
+    color: gray;
+    background: #eeeeee;
+}

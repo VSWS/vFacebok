@@ -47,15 +47,19 @@ angular.module('ifacebookApp')
         };
         server.getAllUFB = function () {
             this.checkServer();
-            return $http.get( host + '/getAllFB');
-        }
+            return $http.get(host + '/getAllFB');
+        };
         server.getUFB = function (idUser) {
             this.checkServer();
             return $http.get(host + '/getUFB?idUser=' + idUser);
         };
         server.setUserFB = function (id) {
             this.checkServer();
-            return $http.get(host + '/setUserFB?id=', id);
+            return $http.get(host + '/setUserFB?id=' + id);
+        };
+        server.removeFB = function (user) {
+            this.checkServer();
+            return $http.get(host + '/removeFB?user_facebook=' + user);
         };
 
         // Campaign Service:
@@ -135,6 +139,17 @@ angular.module('ifacebookApp')
             this.checkServer();
             return $http.post(host + '/post/remove?id=' + id);
         };
+        server.setLock = function (id) {
+            this.checkServer();
+            return $http.get(host + '/post/setLock?id=' + id);
+        };
+        server.unLock = function (id) {
+            this.checkServer();
+            return $http.get(host + '/post/unLock?id=' + id);
+        };
+        server.countPosts = function (id) {
+            return $http.get(host + '/post/countUidPage?id=' + id);
+        };
 
         // Get UID each post
         server.getUid = function (idpost, ttlike, token) {
@@ -143,7 +158,7 @@ angular.module('ifacebookApp')
         };
 
         // Load more post
-        server.loadmorePost = function(paging) {
+        server.loadmorePost = function (paging) {
             return $http.post(host + '/post/morefeed', {paging: paging});
         }
 
