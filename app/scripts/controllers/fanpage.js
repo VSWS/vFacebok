@@ -149,7 +149,7 @@ angular.module('ifacebookApp')
                     console.log("Server error:", err)
                 })
         };
-        
+
         $scope.tokens = [];
 
         $scope.GetUid = function (idPost, totalLike, token) {
