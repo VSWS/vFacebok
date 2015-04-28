@@ -30,3 +30,13 @@
     color: gray;
     background: #eeeeee;
 }
+
+.ListFanPage td{
+    padding: 5px;
+}
+.ListFanPage .link {
+    cursor: pointer;
+}
+.ListFanPage .link:hover {
+    background-color: #FFFFB0;
+}

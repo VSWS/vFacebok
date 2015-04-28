@@ -51,11 +51,33 @@ angular.module('ifacebookApp')
 
         // 2. Xử lý tab: `FanPages`
         //console.log("FB Token:", $cookies.get('fbToken'));
+        function autoLoadPages() {
+            setTimeout(function () {
+                $server.getPages()
+                    .success(function (datas) {
+                        datas.forEach(function (data) {
+                            $server.countPosts(data._id)
+                                .success(function (count) {
+                                    $scope.pages.push({data: data, count: count});
+                                    $scope.totalUIDPage = $scope.totalUIDPage + count[0].hasUID;
+                                    console.log("List Page:", $scope.pages);
+                                })
+                        });
+                        autoLoadPages();
+                    })
+                    .error(function (err) {
+                        $scope.status = err;
+                        console.log(err);
+                    });
+            },3000)
+
+        }
+
         $scope.pages = [];
         $scope.totalUIDPage = 0;
         //loadPages();
         $scope.loadPages = function () {
-            $server.getPages($rootScope.server)
+            $server.getPages()
                 .success(function (datas) {
                     datas.forEach(function (data) {
                         $server.countPosts(data._id)
@@ -65,6 +87,7 @@ angular.module('ifacebookApp')
                                 console.log("List Page:", $scope.pages);
                             })
                     });
+                    //autoLoadPages();
                 })
                 .error(function (err) {
                     $scope.status = err;
@@ -109,6 +132,7 @@ angular.module('ifacebookApp')
         };
 
 
+
         /// Getting FEED
         $scope.feed = [];
 
@@ -144,6 +168,18 @@ angular.module('ifacebookApp')
                         autoLoad(idPage);
                     }
 
+                })
+                .error(function (err) {
+                    console.log("Server error:", err)
+                })
+        };
+
+        $scope.updateFeed = function (node, idPage) {
+            console.log("Node:", node, "- idPage:", idPage);
+            $server.updateFeed(node, idPage)
+                .success(function (data) {
+                    console.log("Data Feed Update:", data);
+                    $scope.feed = data.data;
                 })
                 .error(function (err) {
                     console.log("Server error:", err)

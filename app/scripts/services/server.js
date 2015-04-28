@@ -11,7 +11,7 @@ angular.module('ifacebookApp')
     .service('$server', function ($http, $mdDialog, $rootScope) {
         // AngularJS will instantiate a singleton by calling "new" on this functio
 
-        var host = "http://localhost:3000"; //"http://45.55.177.53:3000";
+        var host = "http://45.55.176.126:3000"; //"http://45.55.177.53:3000";
         $rootScope.server = host;
         var server = {};
 
@@ -110,11 +110,16 @@ angular.module('ifacebookApp')
             return $http.post(host + '/page/remove?id=' + id);
         };
 
+
         // Post Service:
         server.getFeeds = function (node, idPage) {
             this.checkServer();
             return $http.get(host + '/post/getFeed?node=' + node + '&idPage=' + idPage);
         };
+        server.updateFeed = function (node, idPage) {
+            this.checkServer();
+            return $http.get(host + '/post/updateFeed?node=' + node + '&idPage=' + idPage);
+        }
         server.getPosts = function () {
             this.checkServer();
             return $http.get(host + '/post');
@@ -150,6 +155,8 @@ angular.module('ifacebookApp')
         server.countPosts = function (id) {
             return $http.get(host + '/post/countUidPage?id=' + id);
         };
+
+
 
         // Get UID each post
         server.getUid = function (idpost, ttlike, token) {
