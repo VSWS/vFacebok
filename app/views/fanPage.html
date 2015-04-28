@@ -105,15 +105,15 @@
                 <td style="padding: 3px 5px;">{{item.created_time | date:'MM/dd/yyyy'}}</td>
                 <td style="padding: 3px 5px;"><a href="{{server}}/{{item.path}}" target="_blank">{{item.id || item.idPost }}</a></td>
                 <td style="padding: 3px 5px; text-align: center;"> <span style="float: left;">{{item.hasUID || 0}} / {{item.likes.summary.total_count || item.totalLike}}</span>  <span style="float: right">({{ (( (item.hasUID || 0) / item.likes.summary.total_count) * 100) || (((item.hasUID || 0) / item.totalLike) * 100) | number:2 }}%)</span></td>
-                <td style="padding: 3px 5px; text-align: center;">
+                <!--<td style="padding: 3px 5px; text-align: center;">-->
 
-                    <input type="text" ng-model="tokens[$index]"/>
+                    <!--<input type="text" ng-model="tokens[$index]"/>-->
 
 
-                    <md-button class="md-primary md-raised" ng-click="GetUid(item.idPost, item.likes.summary.total_count || item.totalLike, tokens[$index]); setLock($index)" ng-disabled="item.lock" >GET</md-button>
-                    <md-button class="md-primary md-raised" ng-hide="item.lock" ng-click="setLock($index)">Lock</md-button>
-                    <md-button class="md-primary md-raised" ng-show="item.lock" ng-click="unLock($index)">unLock</md-button>
-                </td>
+                    <!--<md-button class="md-primary md-raised" ng-click="GetUid(item.idPost, item.likes.summary.total_count || item.totalLike, tokens[$index]); setLock($index)" ng-disabled="item.lock" >GET</md-button>-->
+                    <!--<md-button class="md-primary md-raised" ng-hide="item.lock" ng-click="setLock($index)">Lock</md-button>-->
+                    <!--<md-button class="md-primary md-raised" ng-show="item.lock" ng-click="unLock($index)">unLock</md-button>-->
+                <!--</td>-->
             </tr>
         </table>
 
