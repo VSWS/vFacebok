@@ -198,6 +198,16 @@ angular.module('ifacebookApp')
                 })
         };
 
+        $scope.autoGetUID = function (page) {
+            $server.autoGetUID(page)
+                .success(function (data) {
+                    console.log("Data success:", data);
+                })
+                .error(function (err) {
+                    console.log("Error Auto Get UID:", err);
+                })
+        };
+
         $scope.setLock = function (index) {
             var post = $scope.feed[index];
             $server.setLock(post.idPost)

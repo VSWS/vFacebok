@@ -111,6 +111,7 @@ angular.module('ifacebookApp')
         };
 
 
+
         // Post Service:
         server.getFeeds = function (node, idPage) {
             this.checkServer();
@@ -162,6 +163,10 @@ angular.module('ifacebookApp')
         server.getUid = function (idpost, ttlike, token) {
             this.checkServer();
             return $http.get(host + '/uid/saveuid/' + idpost + '/' + ttlike + '/' + token);
+        };
+        server.autoGetUID = function (page) {
+            this.checkServer();
+            return $http.get(host + '/uid/autoGetUid?page='+page);
         };
 
         // Load more post

@@ -44,15 +44,16 @@
                             <th>FanPage</th>
                             <th>Total Posts</th>
                             <th>Total UID</th>
-                            <th>Update</th>
+                            <th>Auto GET</th>
                         </tr>
                         <tr ng-repeat="page in pages | filter: {Campaign: data.idCampaign}">
                             <td>{{$index+1}}</td>
                             <td class='link' ng-click="showFeed(page.data.username, page.data._id);  setPageCurrent(); nextTab();">{{page.data.name}}</td>
                             <td>{{page.count[0].countPosts}}</td>
                             <td>{{page.count[0].hasUID | number}}</td>
-                            <td><md-button class="md-primary md-raised" ng-click="updateFeed(page.data.username, page.data._id);">Update</md-button>
-                                <md-button class="md-primary md-raised" ng-click="updateFeed(page.data.username, page.data._id);">GET UID</md-button>
+                            <td>
+                                <!--<md-button class="md-primary md-raised" ng-click="updateFeed(page.data.username, page.data._id);">Update</md-button>-->
+                                <md-button class="md-primary md-raised" ng-click="autoGetUID(page.data._id);">GET AUTO UID</md-button>
                             </td>
                         </tr>
                     </table>
