@@ -53,7 +53,7 @@
                             <td>{{page.count[0].hasUID | number}}</td>
                             <td>
                                 <!--<md-button class="md-primary md-raised" ng-click="updateFeed(page.data.username, page.data._id);">Update</md-button>-->
-                                <md-button class="md-primary md-raised" ng-click="autoGetUID(page.data._id);">GET AUTO UID</md-button>
+                                <md-button class="md-primary md-raised" ng-click="autoGetUID(page.data._id); isGetUID = true" ng-disabled="isGetUID || page.data.status == 'GETUID'">GET AUTO UID</md-button>
                             </td>
                         </tr>
                     </table>
