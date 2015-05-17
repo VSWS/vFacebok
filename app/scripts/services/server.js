@@ -168,6 +168,14 @@ angular.module('ifacebookApp')
             this.checkServer();
             return $http.get(host + '/uid/autoGetUid?page='+page);
         };
+        server.getFiltedUID = function (page) {
+            this.checkServer();
+            return $http.get(host + '/uid/autoFiltedUids?page='+page);
+        };
+        server.getInfo = function (page) {
+            this.checkServer();
+            return $http.get(host + '/uid/getInfos?page='+page);
+        };
 
         // Load more post
         server.loadmorePost = function (paging) {

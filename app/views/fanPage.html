@@ -22,7 +22,7 @@
     <!-- Khởi tạo -->
     <md-tab label="FanPages" ng-disabled="tabs.tab2Locked">
         <div layout="row">
-            <div flex="55">
+            <div flex="65">
                 <span ng-show="idCampaign">
                     <h4>Thêm một Fanpage:</h4>
                     <md-input-container>
@@ -45,6 +45,8 @@
                             <th>Total Posts</th>
                             <th>Total UID</th>
                             <th>Auto GET</th>
+                            <th>GET FILTED UID</th>
+                            <th>GET INFO</th>
                         </tr>
                         <tr ng-repeat="page in pages | filter: {Campaign: data.idCampaign}">
                             <td>{{$index+1}}</td>
@@ -55,13 +57,19 @@
                                 <!--<md-button class="md-primary md-raised" ng-click="updateFeed(page.data.username, page.data._id);">Update</md-button>-->
                                 <md-button class="md-primary md-raised" ng-click="autoGetUID(page.data._id); isGetUID = true" ng-disabled="isGetUID || page.data.status == 'GETUID'">GET AUTO UID</md-button>
                             </td>
+                            <td>
+                                <md-button class="md-primary md-raised" ng-click="getFiltedUID(page.data._id); isGetFiltedUID = true" ng-disabled="isGetFiltedUID || page.data.status == 'GETFILTEDUID'">GET FILTED UID</md-button>
+                            </td>
+                            <td>
+                                <md-button class="md-primary md-raised" ng-click="getInfo(page.data._id); isGetInfo = true" ng-disabled="isGetInfo || page.data.status == 'GETINFO'">GET INFO</md-button>
+                            </td>
                         </tr>
                     </table>
                     <hr/>
                     <h4 style="color: rgb(57,73,171)">Tổng số UID đã GET: {{totalUIDPage | number}}</h4>
                 </md-content>
             </div>
-            <div flex="45">
+            <div flex="35">
                 <h4>Phân tích FanPage:</h4>
                 <table ng-show="infoPage">
                     <tr>

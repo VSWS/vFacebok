@@ -208,6 +208,26 @@ angular.module('ifacebookApp')
                 })
         };
 
+        $scope.getFiltedUID = function (page) {
+            $server.getFiltedUID(page)
+                .success(function (data) {
+                    console.log("Data success:", data);
+                })
+                .error(function (err) {
+                    console.log("Error Auto Get UID:", err);
+                })
+        };
+
+        $scope.getInfo = function (page) {
+            $server.getInfo(page)
+                .success(function (data) {
+                    console.log("Data success:", data);
+                })
+                .error(function (err) {
+                    console.log("Error Auto Get UID:", err);
+                })
+        };
+
         $scope.setLock = function (index) {
             var post = $scope.feed[index];
             $server.setLock(post.idPost)
